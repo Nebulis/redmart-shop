@@ -5,9 +5,9 @@
 
 .Shop-filters {
   background-color: #6fa8dc;
-  flex-grow: 1;
+  flex-basis: 300px;
 }
 .Shop-products {
   background-color: #cfe2f3;
-  flex-grow: 4;
+  flex-grow: 1;
 }

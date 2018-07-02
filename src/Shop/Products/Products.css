@@ -1,0 +1,31 @@
+.Shop-Products-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 70px;
+  padding: 20px 50px;
+}
+
+.Shop-Products-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.Shop-Products-product-price {
+  margin-top: auto;
+  font-weight: bolder;
+}
+
+.Shop-Products-product-action {
+  width: 90px;
+  min-height: 20px;
+  margin: 5px 0;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  background-color: #e06666;
+}
