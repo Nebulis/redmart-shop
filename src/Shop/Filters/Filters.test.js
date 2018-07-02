@@ -2,7 +2,7 @@ import {mount} from 'enzyme/build/index';
 import React from 'react';
 import {Filters} from './Filters';
 
-describe('Header component', () => {
+describe('Filters component', () => {
   const filters = [
     {
       'name': 'brand',

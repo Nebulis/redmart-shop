@@ -56,7 +56,7 @@ export class Shop extends Component {
         <Filters filters={this.state.filters} filtersChanged={(selectedFilters) => this.setState({selectedFilters})}/>
       </div>
       <div className="Shop-products">
-        <Products products={this.filterProducts(this.state.products, this.state.selectedFilters)}/>
+        <Products products={this.filterProducts(this.state.products, this.state.selectedFilters)} onAddProduct={(product) => console.log(product)}/>
       </div>
     </div>;
   }
