@@ -2,9 +2,14 @@
   "name": "redmart-shop",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1"
+  },
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "4.3.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
