@@ -1,0 +1,13 @@
+.Shop {
+  flex-grow: 1;
+  display: flex;
+}
+
+.Shop-filters {
+  background-color: #6fa8dc;
+  flex-grow: 1;
+}
+.Shop-products {
+  background-color: #cfe2f3;
+  flex-grow: 4;
+}
