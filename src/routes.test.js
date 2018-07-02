@@ -8,7 +8,22 @@ import {mount} from 'enzyme';
 import {NotFound} from './routes';
 
 describe('routes', () => {
-  test('it should render shop component when navigating to "/"', () => {
+  let originalFetch;
+
+  beforeAll(() => {
+    originalFetch = window.fetch;
+    // mock fetch
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: true,
+      json: () => []
+    }));
+  });
+
+  afterAll(() => {
+    window.fetch = originalFetch;
+  });
+
+  test('it should render shop component when navigating to "/"', async () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={['/']}>
         <App/>
