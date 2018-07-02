@@ -12,6 +12,7 @@
   align-items: center;
   background-color: white;
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .Shop-Products-product-price {
