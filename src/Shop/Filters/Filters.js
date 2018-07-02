@@ -28,11 +28,11 @@ export class Filters extends Component {
     filterValues = filterValues.includes(value) ? filterValues.filter(val => val !== value) : [...filterValues, value];
 
     this.setState(prevState => ({
-      selectedFilters: {
-        ...prevState.selectedFilters,
-        [filterName]: [...filterValues],
-      }
-    }),
+        selectedFilters: {
+          ...prevState.selectedFilters,
+          [filterName]: [...filterValues],
+        }
+      }),
       () => this.props.filtersChanged(this.state.selectedFilters)); // signal the selected filters has changed
   }
 
@@ -41,11 +41,13 @@ export class Filters extends Component {
       <div className="Shop-Filters-brand"> {capitalize(filter.name)}</div>
       {
         filter.values.map(value => <div key={`${filter.name}-${value}`} className="Shop-Filters-value">
-          <input type="checkbox"
-                 value={value}
-                 checked={this.isChecked(filter.name, value)}
-                 onClick={() => this.onClick(filter.name, value)}/>
-          {value}
+          <label>
+            <input type="checkbox"
+                   value={value}
+                   checked={this.isChecked(filter.name, value)}
+                   onClick={() => this.onClick(filter.name, value)}/>
+            {value}
+          </label>
         </div>)}
     </Fragment>)
   };
