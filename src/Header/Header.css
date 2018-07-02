@@ -1,4 +1,27 @@
 .Header {
   background-color: #9fc5e8;
   height: 50px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Header-link {
+  width: 90px;
+  min-height: 20px;
+  margin: 10px 10px 10px 0;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.Header-selected {
+  display: none;
+}
+
+.Header-browse{
+  background-color: #cfe2f3;
+}
+
+.Header-cart {
+  background-color: #e06666;
 }
