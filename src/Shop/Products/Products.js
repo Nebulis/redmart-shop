@@ -6,7 +6,7 @@ export const Products = ({products}) => {
   return <div className="Shop-Products-container">
     {
       products.map((product, index) => <div key={index} className="Shop-Products-product">
-        <span className="Shop-Products-product-image"><img src={`/images/${product.image}`} /></span>
+        <span className="Shop-Products-product-image"><img src={`/images/${product.image}`} alt={`product ${product.name}`}/></span>
         <span className="Shop-Products-product-name">{product.name}</span>
         <span className="Shop-Products-product-measurement">{product.measurement}</span>
         <span className="Shop-Products-product-price">{product.price.toLocaleString('en-SG', {style: 'currency', currency: 'SGD'})}</span>
