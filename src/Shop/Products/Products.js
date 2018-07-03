@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Products.css';
 import {withRouter} from 'react-router-dom';
+import {price} from '../../utils/price';
 
 export const Products = withRouter(({products, history, onAddProduct}) => {
   return <div className="Shop-Products-container">
@@ -11,7 +12,7 @@ export const Products = withRouter(({products, history, onAddProduct}) => {
         <span className="Shop-Products-product-image"><img src={`/images/${product.image}`} alt={`product ${product.name}`}/></span>
         <span className="Shop-Products-product-name">{product.name}</span>
         <span className="Shop-Products-product-measurement">{product.measurement}</span>
-        <span className="Shop-Products-product-price">{product.price.toLocaleString('en-SG', {style: 'currency', currency: 'SGD'})}</span>
+        <span className="Shop-Products-product-price">{price(product.price)}</span>
         <a href="#" className="Shop-Products-product-action" onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
