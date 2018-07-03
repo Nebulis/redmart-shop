@@ -3,6 +3,7 @@
   height: 50px;
   display: flex;
   justify-content: flex-end;
+  border: 1px solid black;
 }
 
 .Header-link {
@@ -12,6 +13,7 @@
   padding: 5px;
   text-decoration: none;
   color: black;
+  border: 1px solid black;
 }
 
 .Header-selected {
@@ -19,9 +21,9 @@
 }
 
 .Header-browse{
-  background-color: #cfe2f3;
+  border: 1px solid black;
 }
 
 .Header-cart {
-  background-color: #e06666;
+  background-color: var(--primary);
 }

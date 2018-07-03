@@ -6,7 +6,12 @@
 .Shop-filters {
   background-color: #6fa8dc;
   min-width: 250px;
+  border: 1px solid black;
+  border-top: none;/* dont stack borders */
+  border-right: none; /* dont stack borders */
 }
 .Shop-products {
   flex-grow: 1;
+  border: 1px solid black;
+  border-top: none;/* dont stack borders */
 }
