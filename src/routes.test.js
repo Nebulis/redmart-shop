@@ -3,7 +3,7 @@ import {MemoryRouter} from 'react-router-dom';
 import App from './App';
 import {Shop} from './Shop/Shop';
 import {Cart} from './Cart/Cart';
-import {ProductDetail} from './ProductDetail/ProductDetail';
+import {RoutedProductDetail} from './ProductDetail/ProductDetail';
 import {mount} from 'enzyme';
 import {NotFound} from './routes';
 
@@ -31,7 +31,7 @@ describe('routes', () => {
     );
     expect(wrapper.find(Shop)).toHaveLength(1);
     expect(wrapper.find(Cart)).toHaveLength(0);
-    expect(wrapper.find(ProductDetail)).toHaveLength(0);
+    expect(wrapper.find(RoutedProductDetail)).toHaveLength(0);
     expect(wrapper.find(NotFound)).toHaveLength(0);
   });
 
@@ -43,7 +43,7 @@ describe('routes', () => {
     );
     expect(wrapper.find(Shop)).toHaveLength(0);
     expect(wrapper.find(Cart)).toHaveLength(1);
-    expect(wrapper.find(ProductDetail)).toHaveLength(0);
+    expect(wrapper.find(RoutedProductDetail)).toHaveLength(0);
     expect(wrapper.find(NotFound)).toHaveLength(0);
   });
 
@@ -55,7 +55,7 @@ describe('routes', () => {
     );
     expect(wrapper.find(Shop)).toHaveLength(0);
     expect(wrapper.find(Cart)).toHaveLength(0);
-    expect(wrapper.find(ProductDetail)).toHaveLength(1);
+    expect(wrapper.find(RoutedProductDetail)).toHaveLength(1);
     expect(wrapper.find(NotFound)).toHaveLength(0);
   });
 
@@ -67,7 +67,7 @@ describe('routes', () => {
     );
     expect(wrapper.find(Shop)).toHaveLength(0);
     expect(wrapper.find(Cart)).toHaveLength(0);
-    expect(wrapper.find(ProductDetail)).toHaveLength(0);
+    expect(wrapper.find(RoutedProductDetail)).toHaveLength(0);
     expect(wrapper.find(NotFound)).toHaveLength(1);
   });
 });
