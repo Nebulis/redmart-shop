@@ -3,6 +3,7 @@ import './Shop.css';
 import {Products} from './Products/Products';
 import {Filters} from './Filters/Filters';
 import {capitalize} from '../utils/capitalize';
+import {CartContext} from '../Cart/Cart';
 
 const extractPrice = (price) => {
   const prices = price.split('-');
@@ -51,13 +52,19 @@ export class Shop extends Component {
   }
 
   render() {
-    return <div className="Shop">
-      <div className="Shop-filters">
-        <Filters filters={this.state.filters} filtersChanged={(selectedFilters) => this.setState({selectedFilters})}/>
-      </div>
-      <div className="Shop-products">
-        <Products products={this.filterProducts(this.state.products, this.state.selectedFilters)} onAddProduct={(product) => console.log(product)}/>
-      </div>
-    </div>;
+    return <CartContext.Consumer>
+      {({addProduct}) =>
+        <div className="Shop">
+          <div className="Shop-filters">
+            <Filters filters={this.state.filters}
+                     filtersChanged={(selectedFilters) => this.setState({selectedFilters})}/>
+          </div>
+          <div className="Shop-products">
+            <Products products={this.filterProducts(this.state.products, this.state.selectedFilters)}
+                      onAddProduct={addProduct}/>
+          </div>
+        </div>
+      }
+    </CartContext.Consumer>
   }
 };
