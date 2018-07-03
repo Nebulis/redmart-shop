@@ -2,8 +2,9 @@ import React from 'react';
 import products from '../../public/api/products';
 import {ProductDetailContainer} from './ProductDetail';
 import {mount} from 'enzyme';
+import {CartProvider} from '../Cart/CartContext';
 
-describe.only('ProductDetail component', () => {
+describe('ProductDetail component', () => {
   let originalFetch;
   const productsPromise = Promise.resolve({
     ok: true,
@@ -23,7 +24,7 @@ describe.only('ProductDetail component', () => {
   });
 
   test('display NutriWell LemonGrass With Ginger when passing the correct product', async () => {
-    const wrapper = await mount(<ProductDetailContainer match={{params: {id: 'NutriWell LemonGrass With Ginger'}}} />);
+    const wrapper = await mount(<CartProvider><ProductDetailContainer match={{params: {id: 'NutriWell LemonGrass With Ginger'}}} /></CartProvider>);
     await Promise.all([productsPromise]); // ~ process.nextTick
     wrapper.update();
     expect(wrapper.find('.ProductDetail-name').length).toBe(1);
@@ -31,7 +32,7 @@ describe.only('ProductDetail component', () => {
   });
 
   test('display Loading... when passing an unknown product', async () => {
-    const wrapper = await mount(<ProductDetailContainer match={{params: {id: 'nooooo'}}} />);
+    const wrapper = await mount(<CartProvider><ProductDetailContainer match={{params: {id: 'nooooo'}}} /></CartProvider>);
     await Promise.all([productsPromise]); // ~ process.nextTick
     wrapper.update();
     expect(wrapper.find('.ProductDetail-name').length).toBe(0);

@@ -4,6 +4,7 @@ import filters from '../../public/api/filters';
 import {Shop} from './Shop';
 import {mount} from 'enzyme';
 import {MemoryRouter} from 'react-router-dom';
+import {CartProvider} from '../Cart/CartContext';
 
 describe('Shop component', () => {
   let originalFetch;
@@ -31,14 +32,14 @@ describe('Shop component', () => {
   });
 
   test('display all products when no filter is appied', async () => {
-    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><Shop/></MemoryRouter>);
+    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><CartProvider><Shop/></CartProvider></MemoryRouter>);
     await Promise.all([productsPromise, filtersPromise]);
     wrapper.update();
     expect(wrapper.find('.Shop-Products-product').length).toBe(8);
   });
 
   test('should filter products depending on filters', async () => {
-    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><Shop/></MemoryRouter>);
+    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><CartProvider><Shop/></CartProvider></MemoryRouter>);
     await Promise.all([productsPromise, filtersPromise]);
     wrapper.update();
     wrapper.find('.Shop-Filters-value input').at(0).simulate('click'); // click on nutriwell

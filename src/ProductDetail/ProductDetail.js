@@ -3,10 +3,11 @@ import {withRouter} from 'react-router-dom';
 import './ProductDetail.css'
 import {price} from '../utils/price';
 import PropTypes from 'prop-types';
+import {CartContext} from '../Cart/CartContext';
 
 // all components are small let's keep them in the same file
 
-export const ProductDetail = ({product}) => {
+export const ProductDetail = ({product, onAddProduct}) => {
   return <div className='ProductDetail-container'>
     <h1 className="ProductDetail-name">{product.name}</h1>
     <div className="ProductDetail-image-description-container">
@@ -16,13 +17,18 @@ export const ProductDetail = ({product}) => {
         <div className="ProductDetail-measurement">{product.measurement}</div>
         <div className="ProductDetail-price">{price(product.price)}</div>
         <div className="ProductDetail-description">{product.desc}</div>
-        <a href="#" className="ProductDetail-action">Add to cart</a>
+        <a href="#" className="ProductDetail-action" onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onAddProduct(product)
+        }}>Add to cart</a>
       </div>
     </div>
   </div>
 };
 
 ProductDetail.propTypes = {
+  onAddProduct: PropTypes.func.isRequired,
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -53,7 +59,11 @@ export class ProductDetailContainer extends Component {
   }
 
   render() {
-    return this.state.product.name ? <ProductDetail product={this.state.product}/> : 'Loading ...';
+    return this.state.product.name
+      ? <CartContext.Consumer>
+        {({addProduct}) =><ProductDetail product={this.state.product} onAddProduct={addProduct}/> }
+        </CartContext.Consumer>
+      : 'Loading ...';
   }
 }
 

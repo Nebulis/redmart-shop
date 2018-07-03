@@ -1,6 +1,6 @@
 import {price} from './price';
 
-describe.only('price', () => {
+describe('price', () => {
   test('should return "$2.00" when input is 2"', () => {
     expect(price(2)).toBe('$2.00');
   });

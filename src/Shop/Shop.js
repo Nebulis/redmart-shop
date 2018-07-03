@@ -3,7 +3,7 @@ import './Shop.css';
 import {Products} from './Products/Products';
 import {Filters} from './Filters/Filters';
 import {capitalize} from '../utils/capitalize';
-import {CartContext} from '../Cart/Cart';
+import {CartContext} from '../Cart/CartContext';
 
 const extractPrice = (price) => {
   const prices = price.split('-');
