@@ -9,7 +9,7 @@ export const Products = withRouter(({products, history, onAddProduct}) => {
     {
       // navigate with product name which is the best solution so far ? (no id ?)
       products.map((product, index) => <div key={index} className="Shop-Products-product" onClick={() => history.push(`/product/${product.id}`)}>
-        <span className="Shop-Products-product-image"><img src={`/images/${product.image}`} alt={`product ${product.name}`}/></span>
+        <span className="Shop-Products-product-image"><img src={`${process.env.PUBLIC_URL}/images/${product.image}`} alt={`product ${product.name}`}/></span>
         <span className="Shop-Products-product-name">{product.name}</span>
         <span className="Shop-Products-product-measurement">{product.measurement}</span>
         <span className="Shop-Products-product-price">{price(product.price)}</span>

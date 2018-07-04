@@ -11,7 +11,7 @@ export const ProductDetail = ({product, onAddProduct}) => {
   return <div className='ProductDetail-container'>
     <h1 className="ProductDetail-name">{product.name}</h1>
     <div className="ProductDetail-image-description-container">
-      <div className="ProductDetail-image"><img src={`/images/${product.image}`} alt={`product ${product.name}`}/>
+      <div className="ProductDetail-image"><img src={`${process.env.PUBLIC_URL}/images/${product.image}`} alt={`product ${product.name}`}/>
       </div>
       <div className="ProductDetail-description-container">
         <div className="ProductDetail-measurement">{product.measurement}</div>
