@@ -37,7 +37,7 @@ export class Shop extends Component {
   }
 
   componentDidMount() {
-    return fetch('/api/filters.json')
+    return fetch(`${process.env.PUBLIC_URL}/api/filters.json`)
       .then(data => data.json())
       .then(filters => filters.map(filter => ({
         ...filter,
