@@ -31,7 +31,7 @@
 .ProductDetail-action {
   align-self: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin-top: auto;
   width: 200px;

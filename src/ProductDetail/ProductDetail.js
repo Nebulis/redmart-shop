@@ -3,10 +3,10 @@ import {withRouter} from 'react-router-dom';
 import './ProductDetail.css'
 import {price} from '../utils/price';
 import PropTypes from 'prop-types';
-import {CartContext} from '../Cart/CartContext';
+import {mapCartAndProduct} from '../selectors/products.selector';
+import {ProductsAndCartConsumer} from '../ProductsAndCartConsumer';
 
 // all components are small let's keep them in the same file
-
 export const ProductDetail = ({product, onAddProduct}) => {
   return <div className='ProductDetail-container'>
     <h1 className="ProductDetail-name">{product.name}</h1>
@@ -21,17 +21,19 @@ export const ProductDetail = ({product, onAddProduct}) => {
           event.preventDefault();
           event.stopPropagation();
           onAddProduct(product)
-        }}>Add to cart</a>
+        }}>Add to cart {product.quantity > 0 && <span>({product.quantity})</span>}</a>
       </div>
     </div>
   </div>
 };
 
+// TODO handle default value of quantity
 ProductDetail.propTypes = {
   onAddProduct: PropTypes.func.isRequired,
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    quantity: PropTypes.number,
     desc: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
     measurement: PropTypes.string.isRequired,
@@ -41,29 +43,20 @@ ProductDetail.propTypes = {
 
 // let's create a container so we separate behaviour from pure rendering
 export class ProductDetailContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: {}
-    };
-  }
-
-  // fetch again the product anf find the matching product from the url
-  // we could eventually use the fetched product from another component to avoid multiple fetching :)
-  // we use the name as the key as there is no id in the data
-  componentDidMount() {
-    return fetch('/api/products.json')
-      .then(data => data.json())
-      .then(products => products.find(product => product.name === this.props.match.params.id))
-      .then(product => product && this.setState({product: product}));
+  findProduct(products) {
+    return products.find(product => product.id === this.props.match.params.id);
   }
 
   render() {
-    return this.state.product.name
-      ? <CartContext.Consumer>
-        {({addProduct}) =><ProductDetail product={this.state.product} onAddProduct={addProduct}/> }
-        </CartContext.Consumer>
-      : 'Loading ...';
+    return <ProductsAndCartConsumer>
+      {({products, cart, addProduct}) => {
+        const product = this.findProduct(products);
+        return product ?
+          <ProductDetail product={mapCartAndProduct(product, cart)} onAddProduct={addProduct}/>
+          : 'Loading ...'
+      }
+      }
+    </ProductsAndCartConsumer>
   }
 }
 

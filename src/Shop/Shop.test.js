@@ -1,17 +1,12 @@
 import React from 'react';
 import products from '../../public/api/products';
 import filters from '../../public/api/filters';
-import {Shop} from './Shop';
 import {mount} from 'enzyme';
 import {MemoryRouter} from 'react-router-dom';
-import {CartProvider} from '../Cart/CartContext';
 
 describe('Shop component', () => {
   let originalFetch;
-  const productsPromise = Promise.resolve({
-    ok: true,
-    json: () => products,
-  });
+  let Shop;
   const filtersPromise = Promise.resolve({
     ok: true,
     json: () => filters,
@@ -23,8 +18,14 @@ describe('Shop component', () => {
     // first call return products
     // second call return filters
     window.fetch = jest.fn()
-      .mockImplementationOnce(() => productsPromise)
       .mockImplementationOnce(() => filtersPromise);
+
+    jest.doMock('../ProductsAndCartConsumer', () => {
+      return {
+        ProductsAndCartConsumer: ({children}) => children({products, cart: {}, addProduct: () => {}})
+      }
+    });
+    Shop = require('./Shop').Shop;
   });
 
   afterEach(() => {
@@ -32,15 +33,15 @@ describe('Shop component', () => {
   });
 
   test('display all products when no filter is appied', async () => {
-    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><CartProvider><Shop/></CartProvider></MemoryRouter>);
-    await Promise.all([productsPromise, filtersPromise]);
+    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><Shop/></MemoryRouter>);
+    await Promise.all([filtersPromise]); // ~ process.nextTick
     wrapper.update();
     expect(wrapper.find('.Shop-Products-product').length).toBe(8);
   });
 
   test('should filter products depending on filters', async () => {
-    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><CartProvider><Shop/></CartProvider></MemoryRouter>);
-    await Promise.all([productsPromise, filtersPromise]);
+    const wrapper = await mount(<MemoryRouter initialEntries={['/']}><Shop/></MemoryRouter>);
+    await Promise.all([filtersPromise]);// ~ process.nextTick
     wrapper.update();
     wrapper.find('.Shop-Filters-value input').at(0).simulate('click'); // click on nutriwell
     // when clicking on nutriwell only 6 elements are expected

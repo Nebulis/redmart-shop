@@ -8,7 +8,7 @@ export const Products = withRouter(({products, history, onAddProduct}) => {
   return <div className="Shop-Products-container">
     {
       // navigate with product name which is the best solution so far ? (no id ?)
-      products.map((product, index) => <div key={index} className="Shop-Products-product" onClick={() => history.push(`/product/${product.name}`)}>
+      products.map((product, index) => <div key={index} className="Shop-Products-product" onClick={() => history.push(`/product/${product.id}`)}>
         <span className="Shop-Products-product-image"><img src={`/images/${product.image}`} alt={`product ${product.name}`}/></span>
         <span className="Shop-Products-product-name">{product.name}</span>
         <span className="Shop-Products-product-measurement">{product.measurement}</span>
@@ -17,16 +17,18 @@ export const Products = withRouter(({products, history, onAddProduct}) => {
           event.preventDefault();
           event.stopPropagation();
           onAddProduct(product)
-        }}>Add to cart</a>
+        }}>Add to cart {product.quantity > 0 && <span>({product.quantity})</span>}</a>
       </div>)
     }
   </div>
 });
 
+// TODO handle default value of quantity
 Products.propTypes = ({
   products: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    quantity: PropTypes.number,
     desc: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
     measurement: PropTypes.string.isRequired,

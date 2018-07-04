@@ -10,11 +10,10 @@ describe('Shop component', () => {
 
   test('should render all products added in the cart', async () => {
     // add 2 products in the cart context
-    jest.doMock('./CartContext', () => {
+    jest.doMock('../ProductsAndCartConsumer', () => {
       return {
-        CartContext: {
-          Consumer: (props) => props.children({products: [products[0], products[1]], addProduct: () => {}})
-        }
+        ProductsAndCartConsumer: (props) =>
+          props.children({products, addProduct: () => {}, cart: {'1': 3, '2': 0, '5': 9}})
       }
     });
     const Cart = require('./Cart').Cart;

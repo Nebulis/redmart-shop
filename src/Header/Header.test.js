@@ -1,5 +1,6 @@
 import {mount} from 'enzyme/build/index';
 import {MemoryRouter} from 'react-router-dom';
+import products from '../../public/api/products.json';
 import React from 'react';
 import {Header} from './Header';
 
@@ -7,7 +8,7 @@ describe('Header component', () => {
   test('it should not render Browse link when navigating to /', () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={['/']}>
-        <Header/>
+        <Header products={products} cart={{}}/>
       </MemoryRouter>
     );
 
@@ -18,7 +19,7 @@ describe('Header component', () => {
   test('it should not render Cart link when navigating to /cart', () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={['/cart']}>
-        <Header/>
+        <Header products={products} cart={{}}/>
       </MemoryRouter>
     );
 
@@ -29,7 +30,7 @@ describe('Header component', () => {
   test('it should not render both link when navigating to /product/some', () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={['/product/some']}>
-        <Header/>
+        <Header products={products} cart={{}}/>
       </MemoryRouter>
     );
     expect(wrapper.find('.Header-selected .Header-selected').exists()).toBe(false);
